@@ -2,14 +2,29 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GUI {
+public class GUI implements ActionListener {
+
+    private int count = 0;
+    private JLabel label;
+    private JFrame frame;
+    private JPanel panel;
+
     public GUI() {
+
         JFrame frame = new JFrame();
 
-        JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
+        JButton button = new JButton("CLick me");
+        button.addActionListener(this);
+        label = new JLabel("Number of clicks: 0");
+
+        panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel.setLayout(new GridLayout(0, 1));
+        panel.add(button);
+        panel.add(label);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,7 +34,15 @@ public class GUI {
     }
 
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
         new GUI();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        count++;
+        label.setText("Number of clicks: " + count);
+
     }
 }
